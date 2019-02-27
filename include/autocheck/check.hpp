@@ -1,6 +1,8 @@
 #ifndef AUTOCHECK_CHECK_HPP
 #define AUTOCHECK_CHECK_HPP
 
+#include <iomanip>
+#include <limits>
 #include <sstream>
 
 #include "function.hpp"
@@ -39,7 +41,10 @@ namespace autocheck {
     while (arb(args) && (++tests != max_tests)) {
       /* Get what we need from `args` before we let the user modify them. */
       std::ostringstream reason;
-      reason << std::boolalpha << args;
+      reason << std::boolalpha
+             << std::setprecision(std::numeric_limits<long double>::digits10 +
+                                  1)
+             << args;
       if (verbose) {
         std::cout << reason.str() << std::endl;
       }
