@@ -22,7 +22,7 @@ namespace autocheck {
 
   template <typename F, typename... Args>
   struct result_of_apply<F, std::tuple<Args...>> {
-    typedef typename std::result_of<F(Args&...)>::type type;
+    typedef typename std::invoke_result_t<F, Args&...> type;
   };
 
   template <typename F, typename Tuple, int... Is>
